@@ -5,3 +5,4 @@ DerivedData/
 Config/Local.xcconfig
 *.xcuserstate
 xcuserdata/
+dist/

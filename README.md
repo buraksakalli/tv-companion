@@ -38,7 +38,16 @@ Everything runs locally between your Mac and the TV. There's no cloud, no accoun
 
 ## Install
 
-Prebuilt releases aren't available yet, so build from source:
+**Download:** get `TVCompanion-x.y.z.dmg` from [Releases](https://github.com/buraksakalli/tv-companion/releases/latest), open it and drag TV Companion to Applications.
+
+> [!NOTE]
+> Releases aren't notarized yet, so the first launch is blocked by macOS. To allow it, either:
+> - open the app once, then go to **System Settings → Privacy & Security** and click **Open Anyway**, or
+> - run `xattr -dr com.apple.quarantine /Applications/TVCompanion.app`
+>
+> If you'd rather not, build from source below.
+
+**Build from source:**
 
 ```sh
 brew install xcodegen
@@ -110,6 +119,8 @@ Sources/TVCompanion/
 └── Views/      Menu bar UI, settings
 Tests/          Swift Testing unit tests
 ```
+
+**Releases.** `scripts/release.sh` builds the app, signs it with a Developer ID, notarizes and staples it, and packages `dist/TVCompanion-<version>.dmg`. The one-time setup is described at the top of the script. Use `scripts/release.sh --unsigned` to test packaging locally.
 
 Debug builds have two extra flags:
 

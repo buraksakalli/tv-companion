@@ -1,0 +1,54 @@
+name: TVCompanion
+options:
+  bundleIdPrefix: com.buraksakalli
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    ENABLE_HARDENED_RUNTIME: YES
+configFiles:
+  Debug: Config/Signing.xcconfig
+  Release: Config/Signing.xcconfig
+targets:
+  TVCompanion:
+    type: application
+    platform: macOS
+    sources: [Sources/TVCompanion]
+    info:
+      path: Sources/TVCompanion/Info.plist
+      properties:
+        CFBundleDisplayName: TV Companion
+        CFBundleShortVersionString: "0.1.0"
+        CFBundleVersion: "1"
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.utilities
+        NSLocalNetworkUsageDescription: TV Companion talks to your LG TV on the local network to turn it on/off and switch inputs.
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.buraksakalli.tvcompanion
+        GENERATE_INFOPLIST_FILE: NO
+  TVCompanionTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [Tests/TVCompanionTests]
+    dependencies:
+      - target: TVCompanion
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.buraksakalli.tvcompanion.tests
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/TVCompanion.app/Contents/MacOS/TVCompanion
+schemes:
+  TVCompanion:
+    build:
+      targets:
+        TVCompanion: all
+        TVCompanionTests: [test]
+    test:
+      targets: [TVCompanionTests]

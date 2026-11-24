@@ -42,8 +42,8 @@ Prebuilt releases aren't available yet, so build from source:
 
 ```sh
 brew install xcodegen
-git clone https://github.com/buraksakalli/tv-companion-.git
-cd tv-companion-
+git clone https://github.com/buraksakalli/tv-companion.git
+cd tv-companion
 make install      # builds Release and copies it to ~/Applications
 ```
 
